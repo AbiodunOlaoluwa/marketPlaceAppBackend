@@ -28,7 +28,7 @@ const searchProducts = async (req, res) => {
   const { q } = req.query;
   const searchQuery = `
     SELECT * FROM products
-    WHERE LOWER(name) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1)
+    WHERE LOWER(name) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1) OR LOWER(category)
   `;
   try {
     const products = await pool.query(searchQuery, [`%${q}%`]);
