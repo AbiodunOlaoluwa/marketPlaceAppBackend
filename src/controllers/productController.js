@@ -28,12 +28,13 @@ const searchProducts = async (req, res) => {
   const { q } = req.query;
   const searchQuery = `
     SELECT * FROM products
-    WHERE LOWER(name) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1) OR LOWER(category)
+    WHERE LOWER(name) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1)
   `;
   try {
     const products = await pool.query(searchQuery, [`%${q}%`]);
     res.json(products.rows);
   } catch (error) {
+    console.log(`Error: ${error}`)
     res.status(500).json({ error: 'Failed to search products' });
   }
 };
