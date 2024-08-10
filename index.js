@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import productRoutes from "./src/routes/productRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import cartRoutes from "./src/routes/cartRoutes.js";
+import queueRoutes from "./src/routes/queueRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/queue", queueRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -39,4 +39,17 @@ const searchProducts = async (req, res) => {
   }
 };
 
-export { getAllProducts, searchProducts };
+
+//will be hit up when we want to ascertain exactly the amount to deduct for a click
+const getClickPrice = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const clickInfo = await pool.query('SELECT price_per_click FROM clicks WHERE product_id = $1', [productId]);
+    res.json(clickInfo.rows[0]);
+  } catch (error) {
+    console.error('Failed to get click price: ', error);
+    res.status(500).json({ error: 'Failed to get click price' });
+  }
+}
+
+export { getAllProducts, searchProducts, getClickPrice };
